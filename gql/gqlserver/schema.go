@@ -91,13 +91,13 @@ func (s *SchemaWrapper) Init() error {
 						"coupon_id": &graphql.ArgumentConfig{
 							Type: graphql.NewNonNull(graphql.Int),
 						},
-						"start_date": &graphql.ArgumentConfig{
+						"coupon_start_date": &graphql.ArgumentConfig{
 							Type: graphql.NewNonNull(graphql.String),
 						},
-						"end_date": &graphql.ArgumentConfig{
+						"coupon_end_date": &graphql.ArgumentConfig{
 							Type: graphql.NewNonNull(graphql.String),
 						},
-						"duration": &graphql.ArgumentConfig{
+						"coupon_duration": &graphql.ArgumentConfig{
 							Type: graphql.NewNonNull(graphql.Int),
 						},
 					},
