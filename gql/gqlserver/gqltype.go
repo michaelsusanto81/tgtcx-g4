@@ -80,6 +80,7 @@ var CouponType = graphql.NewObject(
 	},
 )
 
+<<<<<<< HEAD
 var CouponToppersType = graphql.NewObject(
 	graphql.ObjectConfig{
 		Name:        "CouponToppers",
@@ -93,6 +94,15 @@ var CouponToppersType = graphql.NewObject(
 			},
 			"coupon_id": &graphql.Field{
 				Type: graphql.Int,
+=======
+var ResultType = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name:        "Result",
+		Description: "Result of operation",
+		Fields: graphql.Fields{
+			"success": &graphql.Field{
+				Type: graphql.Boolean,
+>>>>>>> createcoupon-updateduration
 			},
 		},
 	},
