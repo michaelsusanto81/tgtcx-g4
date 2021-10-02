@@ -59,11 +59,13 @@ func (r *Resolver) UpdateCouponDuration() graphql.FieldResolveFn {
 		id, _ := p.Args["coupon_id"].(uint64)
 		startDate, _ := p.Args["coupon_start_date"].(string)
 		endDate, _ := p.Args["coupon_end_date"].(string)
+		duration, _ := p.Args["coupon_duration"].(uint64)
 
 		req := dictionary.Coupon{
 			ID:        id,
 			StartDate: startDate,
 			EndDate:   endDate,
+			Duration:  duration,
 		}
 
 		_, err := service.UpdateCouponDuration(req)
