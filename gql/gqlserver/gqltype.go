@@ -97,3 +97,15 @@ var CouponToppersType = graphql.NewObject(
 		},
 	},
 )
+
+var ResultType = graphql.NewObject(
+	graphql.ObjectConfig{
+		Name:        "Result",
+		Description: "Result of operation",
+		Fields: graphql.Fields{
+			"success": &graphql.Field{
+				Type: graphql.Boolean,
+			},
+		},
+	},
+)
