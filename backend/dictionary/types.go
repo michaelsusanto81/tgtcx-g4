@@ -6,6 +6,12 @@ type User struct {
 	Type string `json:"type"`
 }
 
+type CouponTargetType struct {
+	ID       uint64 `json:"id"`
+	Name     string `json:"name"`
+	CouponID uint64 `json:"coupon_id"`
+}
+
 type Coupon struct {
 	ID               uint64   `json:"id"`
 	Name             string   `json:"name"`
