@@ -31,15 +31,15 @@ func UpdateCoupon(data dictionary.Coupon) (*dictionary.Coupon, error) {
 		UPDATE
 			coupon
 		SET
-			coupon_name = $2
-			coupon_desc = $3
-			coupon_duration = $4
-			coupon_live = $5
-			coupon_start_date = $6
-			coupon_end_date = $7
-			coupon_min_transaction = $8
-			coupon_discount = $9
-			coupon_max_discount_price = $10
+			coupon_name = $2,
+			coupon_desc = $3,
+			coupon_duration = $4,
+			coupon_live = $5,
+			coupon_start_date = $6,
+			coupon_end_date = $7,
+			coupon_min_transaction = $8,
+			coupon_discount = $9,
+			coupon_max_discount_price = $10,
 			coupon_category = $11
 		WHERE
 			coupon_id = $1
@@ -272,16 +272,18 @@ func UpdateCouponDuration(data dictionary.Coupon) (*dictionary.Coupon, error) {
 	UPDATE 
 		coupon
 	SET 
-		coupon_start_date = $1,
-		coupon_end_date = $2,
+		coupon_start_date = $2,
+		coupon_end_date = $3,
+		coupon_duration = $4
 	WHERE
-		coupon_id = $3
+		coupon_id = $1
 	`
 	// actual query process
 	result, err := db.Exec(query,
+		data.ID,
 		data.StartDate,
 		data.EndDate,
-		data.ID,
+		data.Duration,
 	)
 	if err != nil {
 		return nil, err
