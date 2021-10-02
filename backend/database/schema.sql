@@ -1,7 +1,7 @@
-CREATE TABLE IF NOT EXISTS user (
-    user_id SERIAL PRIMARY KEY,
-    user_name TEXT,
-    user_type TEXT
+CREATE TABLE IF NOT EXISTS toppers (
+    toppers_id SERIAL PRIMARY KEY,
+    toppers_name TEXT,
+    toppers_type TEXT
 );
 
 CREATE TABLE IF NOT EXISTS coupon (
@@ -18,14 +18,14 @@ CREATE TABLE IF NOT EXISTS coupon (
     coupon_category TEXT
 );
 
-CREATE TABLE IF NOT EXISTS coupon_user (
-    couponuser_id SERIAL PRIMARY KEY,
-    user_id INT,
+CREATE TABLE IF NOT EXISTS coupon_toppers (
+    coupontoppers_id SERIAL PRIMARY KEY,
+    toppers_id INT,
     coupon_id INT,
-    CONSTRAINT fk_user
-        FOREIGN KEY (user_id)
-            REFERENCES user(user_id)
-            ON DELETE CASCADE
+    CONSTRAINT fk_toppers
+        FOREIGN KEY (toppers_id)
+            REFERENCES toppers(toppers_id)
+            ON DELETE CASCADE,
     CONSTRAINT fk_coupon
         FOREIGN KEY (coupon_id)
             REFERENCES coupon(coupon_id)

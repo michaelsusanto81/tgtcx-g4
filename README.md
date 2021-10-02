@@ -10,6 +10,16 @@ Members:
 # How to use
 - Edit **.env** file to match your PostgreSQL DB credentials (refer to **.env.sample**)
 
+- Create database schema
+```
+psql -U <DB_USER> -d <DB_NAME> -f backend/database/schema.sql
+```
+
+- Seed data (if needed)
+```
+psql -U <DB_USER> -d <DB_NAME> -f backend/database/dump.sql
+```
+
 - Run go mod vendor
 ```
 go mod vendor
