@@ -235,14 +235,16 @@ func SetTargetUser(data dictionary.CouponTargetType) (*dictionary.CouponTargetTy
 			coupon_target_type
 		SET
 			coupontarget_name = $2
+			coupon_id = $3
 		WHERE
-			coupon_id = $1
+			coupontarget_id = $1
 	`
 
 	// exec
 	result, err := db.Exec(query,
-		data.CouponID,
+		data.ID,
 		data.Name,
+		data.CouponID,
 	)
 	if err != nil {
 		return nil, err

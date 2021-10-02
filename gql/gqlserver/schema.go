@@ -44,6 +44,46 @@ func (s *SchemaWrapper) Init() error {
 					Args:        graphql.FieldConfigArgument{},
 					Resolve:     s.couponResolver.CreateCoupons(),
 				},
+				"UpdateCoupon": &graphql.Field{
+					Type:        graphql.Boolean,
+					Description: "Update coupon by ID",
+					Args: graphql.FieldConfigArgument{
+						"coupon_id": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+						"coupon_name": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.String),
+						},
+						"coupon_description": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.String),
+						},
+						"coupon_duration": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+						"coupon_live": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Boolean),
+						},
+						"coupon_start_date": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.String),
+						},
+						"coupon_end_date": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.String),
+						},
+						"coupon_min_transaction": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+						"coupon_discount": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+						"coupon_max_discount_price": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+						"coupon_category": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.String),
+						},
+					},
+					Resolve: s.couponResolver.UpdateCoupon(),
+				},
 				"UpdateCouponDuration": &graphql.Field{
 					Type:        graphql.Boolean,
 					Description: "Update coupon's duration by ID",
@@ -62,6 +102,35 @@ func (s *SchemaWrapper) Init() error {
 						},
 					},
 					Resolve: s.couponResolver.UpdateCouponDuration(),
+				},
+				"AddTargetUser": &graphql.Field{
+					Type:        graphql.Boolean,
+					Description: "Add target user to specific coupon",
+					Args: graphql.FieldConfigArgument{
+						"coupontarget_name": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.String),
+						},
+						"coupon_id": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+					},
+					Resolve: s.couponResolver.AddTargetUser(),
+				},
+				"SetTargetUser": &graphql.Field{
+					Type:        graphql.Boolean,
+					Description: "Set / Update target user to specific coupon",
+					Args: graphql.FieldConfigArgument{
+						"coupontarget_id": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+						"coupontarget_name": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.String),
+						},
+						"coupon_id": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+					},
+					Resolve: s.couponResolver.SetTargetUser(),
 				},
 			},
 		}),
