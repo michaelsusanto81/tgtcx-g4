@@ -2,12 +2,14 @@ package service
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/tgtcx-g4/coupon/backend/database"
 	"github.com/tgtcx-g4/coupon/backend/dictionary"
 )
 
 func UpdateCoupon(data dictionary.Coupon) (*dictionary.Coupon, error) {
+	fmt.Printf("%v", data)
 	// get current db connection
 	db := database.GetDB()
 
@@ -23,7 +25,7 @@ func UpdateCoupon(data dictionary.Coupon) (*dictionary.Coupon, error) {
 	var is_live bool
 	err_live := db.QueryRow(query, data.ID).Scan(&is_live)
 	if err_live != nil {
-		return nil, err_live
+		return nil, errors.New("1")
 	} else if is_live {
 		return nil, errors.New("Coupon is live")
 	}
@@ -62,12 +64,12 @@ func UpdateCoupon(data dictionary.Coupon) (*dictionary.Coupon, error) {
 		data.Category,
 	)
 	if err != nil {
-		return nil, err
+		return nil, errors.New("2")
 	}
 
 	affected, err := result.RowsAffected()
 	if err != nil {
-		return nil, err
+		return nil, errors.New("3")
 	}
 
 	if affected == 0 {
