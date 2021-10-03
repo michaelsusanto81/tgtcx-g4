@@ -200,6 +200,54 @@ func GetUserCoupons(toppers_id int) ([]dictionary.CouponToppers, error) {
 	return result, nil
 }
 
+func GetCoupon(paramID int) (*dictionary.Coupon, error) {
+
+	// you can connect and
+	// get current database connection
+	db := database.GetDB()
+
+	// construct query
+	query := `
+	SELECT 
+		coupon_id,
+		coupon_name,
+		coupon_desc,
+		coupon_duration,
+		coupon_live,
+		coupon_start_date,
+		coupon_end_date,
+		coupon_min_transaction,
+		coupon_discount,
+		coupon_max_discount_price,
+		coupon_category
+	FROM coupon
+	WHERE coupon_id = $1
+	`
+	// actual query process
+	row := db.QueryRow(query, paramID)
+
+	// read query result, and assign to variable(s)
+	var result dictionary.Coupon
+	err := row.Scan(
+		&result.ID,
+		&result.Name,
+		&result.Description,
+		&result.Duration,
+		&result.Live,
+		&result.StartDate,
+		&result.EndDate,
+		&result.MinTransaction,
+		&result.Discount,
+		&result.MaxDiscountPrice,
+		&result.Category,
+	)
+	if err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
 func GetCoupons() ([]dictionary.Coupon, error) {
 
 	// you can connect and

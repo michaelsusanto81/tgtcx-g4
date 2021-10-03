@@ -26,6 +26,16 @@ func (s *SchemaWrapper) Init() error {
 			Name:        "CouponGetter",
 			Description: "All query related to getting coupon data",
 			Fields: graphql.Fields{
+				"Coupon": &graphql.Field{
+					Type:        CouponType,
+					Description: "Get spesific coupon",
+					Args: graphql.FieldConfigArgument{
+						"coupon_id": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+					},
+					Resolve: s.couponResolver.GetCoupon(),
+				},
 				"Coupons": &graphql.Field{
 					Type:        graphql.NewList(CouponType),
 					Description: "Get all coupons",

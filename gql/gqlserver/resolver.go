@@ -15,6 +15,15 @@ func NewResolver() *Resolver {
 	return &Resolver{}
 }
 
+func (r *Resolver) GetCoupon() graphql.FieldResolveFn {
+	return func(p graphql.ResolveParams) (interface{}, error) {
+		id, _ := p.Args["coupon_id"].(int)
+
+		// update to use Usecase from previous session
+		return service.GetCoupon(id)
+	}
+}
+
 func (r *Resolver) GetCoupons() graphql.FieldResolveFn {
 	return func(p graphql.ResolveParams) (interface{}, error) {
 		return service.GetCoupons()
