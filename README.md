@@ -1,8 +1,10 @@
 # Tokopedia Goes to Campus x Project (TGTCX)
+Coupon Project by Group 4
 
 # Group 4
-Mentor: Alexander Yulius
-Members:
+**Mentor**: Alexander Yulius
+
+**Members**:
 - Clarissa Limoa
 - Michael Susanto
 - Rico Halim
@@ -30,24 +32,19 @@ go mod vendor
 make go_run_backend
 ```
 
+- Run backend service (if your system doesn't have **make** command)
+```
+go build -v -o bin/backend_service backend/main.go
+go run backend/main.go
+```
+
 - Run graphql service
 ```
 make go_run_gql
 ```
 
-- Run backend service if make command not working
-```
-go build -v -o bin/backend_service backend/main.go
-```
-```
-go run backend/main.go
-```
-
-
-- Run graphql service if make command not working
+- Run graphql service (if your system doesn't have **make** command)
 ```
 go build -v -o bin/gql_service gql/main.go
-```
-```
 go run gql/main.go
 ```
