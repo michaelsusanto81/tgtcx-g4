@@ -159,6 +159,45 @@ func GetTargetUsers(coupon_id int) ([]string, error) {
 	return result, nil
 }
 
+func GetUserCoupons(toppers_id int) ([]dictionary.CouponToppers, error) {
+	db := database.GetDB()
+
+	query := `
+		SELECT
+			coupontoppers_id,
+			toppers_id,
+			coupon_id,
+		FROM
+			coupon_toppers
+		WHERE
+			toppers_id = $1
+	`
+
+	// actual query process
+	rows, err := db.Query(query, toppers_id)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var result []dictionary.CouponToppers
+	for rows.Next() {
+		var data dictionary.CouponToppers
+		rows.Scan(
+			&data.ID,
+			&data.ToppersID,
+			&data.CouponID,
+		)
+		if err != nil {
+			return nil, err
+		}
+
+		result = append(result, data)
+	}
+
+	return result, nil
+}
+
 func GetCoupons() ([]dictionary.Coupon, error) {
 
 	// you can connect and

@@ -41,6 +41,16 @@ func (s *SchemaWrapper) Init() error {
 					},
 					Resolve: s.couponResolver.GetTargetUsers(),
 				},
+				"UserCoupons": &graphql.Field{
+					Type:        graphql.NewList(CouponToppersType),
+					Description: "Get user coupons",
+					Args: graphql.FieldConfigArgument{
+						"toppers_id": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+					},
+					Resolve: s.couponResolver.GetUserCoupons(),
+				},
 			},
 		}),
 		// uncomment this and add objects for mutation
@@ -139,7 +149,7 @@ func (s *SchemaWrapper) Init() error {
 							Type: graphql.NewNonNull(graphql.String),
 						},
 						"coupon_duration": &graphql.ArgumentConfig{
-							Type: graphql.NewNonNull(graphql.Int),
+							Type: graphql.Int,
 						},
 					},
 					Resolve: s.couponResolver.UpdateCouponDuration(),

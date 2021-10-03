@@ -28,6 +28,13 @@ func (r *Resolver) GetTargetUsers() graphql.FieldResolveFn {
 	}
 }
 
+func (r *Resolver) GetUserCoupons() graphql.FieldResolveFn {
+	return func(p graphql.ResolveParams) (interface{}, error) {
+		id, _ := p.Args["toppers_id"].(int)
+		return service.GetUserCoupons(id)
+	}
+}
+
 func (r *Resolver) CreateCoupons() graphql.FieldResolveFn {
 	return func(p graphql.ResolveParams) (interface{}, error) {
 		name, _ := p.Args["coupon_name"].(string)
