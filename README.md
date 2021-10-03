@@ -34,3 +34,20 @@ make go_run_backend
 ```
 make go_run_gql
 ```
+
+- Run backend service if make command not working
+```
+go build -v -o bin/backend_service backend/main.go
+```
+```
+go run backend/main.go
+```
+
+
+- Run graphql service if make command not working
+```
+go build -v -o bin/gql_service gql/main.go
+```
+```
+go run gql/main.go
+```
