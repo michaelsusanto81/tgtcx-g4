@@ -93,8 +93,10 @@ func AddTargetUser(data dictionary.CouponTargetType) (*dictionary.CouponTargetTy
 	`
 	var ctt dictionary.CouponTargetType
 	err_exists := db.QueryRow(query, data.CouponID, data.Name).Scan(&ctt)
-	if err_exists != nil || ctt.ID != 0 {
+	if err_exists == nil {
 		return nil, err_exists
+	} else if ctt.ID != 0 {
+		return nil, errors.New("Coupon Target already exists")
 	}
 
 	// query
