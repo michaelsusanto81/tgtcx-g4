@@ -22,8 +22,10 @@ func UpdateCoupon(data dictionary.Coupon) (*dictionary.Coupon, error) {
 	`
 	var is_live bool
 	err_live := db.QueryRow(query, data.ID).Scan(&is_live)
-	if err_live != nil || is_live {
+	if err_live != nil {
 		return nil, err_live
+	} else if is_live {
+		return nil, errors.New("Coupon is live")
 	}
 
 	// query
@@ -118,6 +120,41 @@ func AddTargetUser(data dictionary.CouponTargetType) (*dictionary.CouponTargetTy
 	}
 
 	return &data, nil
+}
+
+func GetTargetUsers(coupon_id int) ([]string, error) {
+	// get current database connection
+	db := database.GetDB()
+
+	// query
+	query := `
+		SELECT
+			coupontarget_name
+		FROM
+			coupon_target_type
+		WHERE
+			coupon_id = $1
+	`
+
+	// actual query process
+	rows, err := db.Query(query, coupon_id)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var result []string
+	for rows.Next() {
+		var data string
+		rows.Scan(&data)
+		if err != nil {
+			return nil, err
+		}
+
+		result = append(result, data)
+	}
+
+	return result, nil
 }
 
 func GetCoupons() ([]dictionary.Coupon, error) {

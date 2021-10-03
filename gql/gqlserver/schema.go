@@ -31,6 +31,16 @@ func (s *SchemaWrapper) Init() error {
 					Description: "Get all coupons",
 					Resolve:     s.couponResolver.GetCoupons(),
 				},
+				"CouponTargetUsers": &graphql.Field{
+					Type:        graphql.NewList(graphql.String),
+					Description: "Get target users from specific coupon",
+					Args: graphql.FieldConfigArgument{
+						"coupon_id": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.Int),
+						},
+					},
+					Resolve: s.couponResolver.GetTargetUsers(),
+				},
 			},
 		}),
 		// uncomment this and add objects for mutation
@@ -41,8 +51,39 @@ func (s *SchemaWrapper) Init() error {
 				"CreateCoupon": &graphql.Field{
 					Type:        graphql.Boolean,
 					Description: "Create coupon",
-					Args:        graphql.FieldConfigArgument{},
-					Resolve:     s.couponResolver.CreateCoupons(),
+					Args: graphql.FieldConfigArgument{
+						"coupon_name": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.String),
+						},
+						"coupon_description": &graphql.ArgumentConfig{
+							Type: graphql.String,
+						},
+						"coupon_duration": &graphql.ArgumentConfig{
+							Type: graphql.Int,
+						},
+						"coupon_live": &graphql.ArgumentConfig{
+							Type: graphql.Boolean,
+						},
+						"coupon_start_date": &graphql.ArgumentConfig{
+							Type: graphql.String,
+						},
+						"coupon_end_date": &graphql.ArgumentConfig{
+							Type: graphql.String,
+						},
+						"coupon_min_transaction": &graphql.ArgumentConfig{
+							Type: graphql.Int,
+						},
+						"coupon_discount": &graphql.ArgumentConfig{
+							Type: graphql.Int,
+						},
+						"coupon_max_discount_price": &graphql.ArgumentConfig{
+							Type: graphql.Int,
+						},
+						"coupon_category": &graphql.ArgumentConfig{
+							Type: graphql.NewNonNull(graphql.String),
+						},
+					},
+					Resolve: s.couponResolver.CreateCoupons(),
 				},
 				"UpdateCoupon": &graphql.Field{
 					Type:        graphql.Boolean,
@@ -52,34 +93,34 @@ func (s *SchemaWrapper) Init() error {
 							Type: graphql.NewNonNull(graphql.Int),
 						},
 						"coupon_name": &graphql.ArgumentConfig{
-							Type: graphql.NewNonNull(graphql.String),
+							Type: graphql.String,
 						},
 						"coupon_description": &graphql.ArgumentConfig{
-							Type: graphql.NewNonNull(graphql.String),
+							Type: graphql.String,
 						},
 						"coupon_duration": &graphql.ArgumentConfig{
-							Type: graphql.NewNonNull(graphql.Int),
+							Type: graphql.Int,
 						},
 						"coupon_live": &graphql.ArgumentConfig{
-							Type: graphql.NewNonNull(graphql.Boolean),
+							Type: graphql.Boolean,
 						},
 						"coupon_start_date": &graphql.ArgumentConfig{
-							Type: graphql.NewNonNull(graphql.String),
+							Type: graphql.String,
 						},
 						"coupon_end_date": &graphql.ArgumentConfig{
-							Type: graphql.NewNonNull(graphql.String),
+							Type: graphql.String,
 						},
 						"coupon_min_transaction": &graphql.ArgumentConfig{
-							Type: graphql.NewNonNull(graphql.Int),
+							Type: graphql.Int,
 						},
 						"coupon_discount": &graphql.ArgumentConfig{
-							Type: graphql.NewNonNull(graphql.Int),
+							Type: graphql.Int,
 						},
 						"coupon_max_discount_price": &graphql.ArgumentConfig{
-							Type: graphql.NewNonNull(graphql.Int),
+							Type: graphql.Int,
 						},
 						"coupon_category": &graphql.ArgumentConfig{
-							Type: graphql.NewNonNull(graphql.String),
+							Type: graphql.String,
 						},
 					},
 					Resolve: s.couponResolver.UpdateCoupon(),
