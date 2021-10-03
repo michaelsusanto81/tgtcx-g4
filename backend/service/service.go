@@ -86,9 +86,9 @@ func AddTargetUser(data dictionary.CouponTargetType) (*dictionary.CouponTargetTy
 	// if already exists return err
 	query := `
 		SELECT coupontarget_id
-		FROM coupun_target_type
+		FROM coupon_target_type
 		WHERE
-			coupontarget_name = $2
+			coupontarget_name = $2 AND
 			coupon_id = $1
 	`
 	var ctt dictionary.CouponTargetType
@@ -166,7 +166,7 @@ func GetUserCoupons(toppers_id int) ([]dictionary.CouponToppers, error) {
 		SELECT
 			coupontoppers_id,
 			toppers_id,
-			coupon_id,
+			coupon_id
 		FROM
 			coupon_toppers
 		WHERE
@@ -312,7 +312,7 @@ func SetTargetUser(data dictionary.CouponTargetType) (*dictionary.CouponTargetTy
 		UPDATE
 			coupon_target_type
 		SET
-			coupontarget_name = $2
+			coupontarget_name = $2,
 			coupon_id = $3
 		WHERE
 			coupontarget_id = $1
